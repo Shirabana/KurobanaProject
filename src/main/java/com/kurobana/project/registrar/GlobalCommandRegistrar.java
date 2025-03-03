@@ -44,7 +44,7 @@ public class GlobalCommandRegistrar implements ApplicationRunner {
 		final ApplicationService applicationService = client.getApplicationService();
 		final long applicationId = client.getApplicationId().block();
         
-        //Get commands json from the resources folder and iterate through each guild to add them
+		//Get commands json from the resources folder and iterate through each guild to add them
 		for (String guildId : guildIds) {
 			List<ApplicationCommandRequest> commands = new ArrayList<>();
 			for (Resource resource : matcher.getResources("commands/*.json")) {
@@ -58,8 +58,7 @@ public class GlobalCommandRegistrar implements ApplicationRunner {
 	        		.doOnError(e -> log.error("Failed to register Guild Command"))
 	        		.subscribe();
 	        
-	        }
-        }
-        
+			}
+		}
 	}
 }
