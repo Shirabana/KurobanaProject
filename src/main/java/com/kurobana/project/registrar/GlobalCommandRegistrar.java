@@ -41,22 +41,22 @@ public class GlobalCommandRegistrar implements ApplicationRunner {
 		final JacksonResources d4jMapper = JacksonResources.create();
 		
 		PathMatchingResourcePatternResolver matcher = new PathMatchingResourcePatternResolver();
-        final ApplicationService applicationService = client.getApplicationService();
-        final long applicationId = client.getApplicationId().block();
+		final ApplicationService applicationService = client.getApplicationService();
+		final long applicationId = client.getApplicationId().block();
         
         //Get commands json from the resources folder and iterate through each guild to add them
-        for (String guildId : guildIds) {
-	        List<ApplicationCommandRequest> commands = new ArrayList<>();
-	        for (Resource resource : matcher.getResources("commands/*.json")) {
-	        	ApplicationCommandRequest request = d4jMapper.getObjectMapper()
-	        		.readValue(resource.getInputStream(), ApplicationCommandRequest.class);
+		for (String guildId : guildIds) {
+			List<ApplicationCommandRequest> commands = new ArrayList<>();
+			for (Resource resource : matcher.getResources("commands/*.json")) {
+				ApplicationCommandRequest request = d4jMapper.getObjectMapper()
+					.readValue(resource.getInputStream(), ApplicationCommandRequest.class);
 	        	
-	        	commands.add(request);
+				commands.add(request);
 	        	
-	        	applicationService.createGuildApplicationCommand(applicationId, Long.valueOf(guildId), request)
-		            .doOnNext(ignore -> log.debug("Successfully registered Guild Command"))
-		    		.doOnError(e -> log.error("Failed to register Guild Command"))
-		    		.subscribe();
+				applicationService.createGuildApplicationCommand(applicationId, Long.valueOf(guildId), request)
+	        		.doOnNext(ignore -> log.debug("Successfully registered Guild Command"))
+	        		.doOnError(e -> log.error("Failed to register Guild Command"))
+	        		.subscribe();
 	        
 	        }
         }
