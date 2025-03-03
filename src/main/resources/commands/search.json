@@ -1,0 +1,18 @@
+{
+	"name":"search",
+	"description":"Generates a link for google to search",
+	"options": [
+		{
+			"name":"query",
+			"description":"Query to search for.",
+			"type":3,
+			"required":true
+		},
+		{
+			"name":"self",
+			"description":"Shows for the user only.",
+			"type":5,
+			"required":false
+		}
+	]
+}
