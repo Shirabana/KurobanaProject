@@ -1,0 +1,24 @@
+{
+	"name":"ivocab",
+	"description":"Inserts a vocabulary word into the database",
+	"options": [
+		{
+			"name":"kana",
+			"description":"Kana of the vocabulary word to enter",
+			"type":3,
+			"required":true
+		},
+		{
+			"name":"definition",
+			"description":"Definition of the vocabulary word to enter, separate by commas",
+			"type":3,
+			"required":true
+		},
+		{
+			"name":"kanji",
+			"description":"Kanji of the vocabulary word to enter",
+			"type":3,
+			"required":false
+		}
+	]
+}
