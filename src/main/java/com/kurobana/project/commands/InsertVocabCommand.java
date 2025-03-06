@@ -3,6 +3,7 @@ package com.kurobana.project.commands;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import com.kurobana.project.entity.Vocabulary;
@@ -59,11 +60,23 @@ public class InsertVocabCommand implements SlashCommand {
 			.flatMap(ApplicationCommandInteractionOption::getValue)
 			.map(ApplicationCommandInteractionOptionValue::asString)
 			.get();
+
+		/**
+		 * Kanji is unique so if it is a duplicate, an error will be thrown
+		 */
+		try {
+			vocabRepo.save(new Vocabulary(kanji, kana, definition));
+		}
+		catch (DataIntegrityViolationException d) {
+			
+			log.error("Error: " + d);
+			
+			return event.reply()
+				.withEphemeral(true)
+				.withContent("Could not add " + kanji + " / " + kana + " to the database as it was a duplicate.");
+		}
 		
-		//Save into the database
-		vocabRepo.save(new Vocabulary(kanji, kana, definition));
-		
-		//Return a reply to the user when done
+		//Return a reply to the user when done and successful
 		return event.reply()
 			.withEphemeral(true)
 			.withContent("Successfully added " + kanji + " / " + kana + " to the database.");

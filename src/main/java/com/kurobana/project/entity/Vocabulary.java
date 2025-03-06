@@ -1,5 +1,6 @@
 package com.kurobana.project.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +13,7 @@ public class Vocabulary {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(unique=true)
 	private String kanji;
 	private String kana;
 	private String definition;
