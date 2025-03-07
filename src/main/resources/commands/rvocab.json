@@ -1,0 +1,4 @@
+{
+	"name":"rvocab",
+	"description":"Outputs a random vocabulary word from the database."
+}

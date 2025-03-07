@@ -13,4 +13,5 @@ public interface SlashCommand {
 	
 	//To handle the logic of each command
 	Mono<Void> handle(ChatInputInteractionEvent event);
+	
 }
