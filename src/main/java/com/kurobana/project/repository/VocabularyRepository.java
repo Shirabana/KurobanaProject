@@ -2,6 +2,8 @@ package com.kurobana.project.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.kurobana.project.entity.Vocabulary;
@@ -21,5 +23,7 @@ public interface VocabularyRepository extends JpaRepository<Vocabulary, Long> {
 	List<Vocabulary> findByKanaContaining(String kana);
 	
 	List<Vocabulary> findByDefinitionContaining(String definition);
+	
+	Page<Vocabulary> findAll(Pageable pageable);
 	
 }

@@ -30,10 +30,6 @@ public class SearchVocabCommand implements SlashCommand {
 	
 	public SearchVocabCommand() {}
 	
-//	public InsertVocabCommand(VocabularyRepository vocabRepo) {
-//		this.vocabRepo = vocabRepo;
-//	}
-	
 	@Override
 	public Mono<Void> handle(ChatInputInteractionEvent event) {
 		
