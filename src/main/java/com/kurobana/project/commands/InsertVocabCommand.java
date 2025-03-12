@@ -26,12 +26,6 @@ public class InsertVocabCommand implements SlashCommand {
 		return "ivocab";
 	}
 	
-	public InsertVocabCommand() {}
-	
-//	public InsertVocabCommand(VocabularyRepository vocabRepo) {
-//		this.vocabRepo = vocabRepo;
-//	}
-	
 	@Override
 	public Mono<Void> handle(ChatInputInteractionEvent event) {
 		

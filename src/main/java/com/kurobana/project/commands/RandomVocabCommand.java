@@ -1,8 +1,5 @@
 package com.kurobana.project.commands;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +11,6 @@ import com.kurobana.project.entity.Vocabulary;
 import com.kurobana.project.repository.VocabularyRepository;
 
 import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
-import discord4j.core.object.command.ApplicationCommandInteractionOption;
-import discord4j.core.object.command.ApplicationCommandInteractionOptionValue;
 import reactor.core.publisher.Mono;
 
 @Component
@@ -30,8 +25,6 @@ public class RandomVocabCommand implements SlashCommand {
 		return "rvocab";
 	}
 	
-	public RandomVocabCommand() {}
-	
 	@Override
 	public Mono<Void> handle(ChatInputInteractionEvent event) {
 		
@@ -39,19 +32,22 @@ public class RandomVocabCommand implements SlashCommand {
 		
 		//Variables to use
 		Long count = vocabRepo.count();
-		Vocabulary vocab = null;
+		Vocabulary v = null;
 		String content = "";
 		
 		//Find a random vocabulary word
 		int random = (int)(Math.random() * count);
 		Page<Vocabulary> vocabPage = vocabRepo.findAll(PageRequest.of(random, 1));
 		if (vocabPage.hasContent()) {
-			vocab = vocabPage.getContent().get(0);
+			v = vocabPage.getContent().get(0);
 			
 			//Build content message
 			content = "Random vocabulary word:";
 			content += "\n-----";
-			content += "\n**Kanji:** " + vocab.getKanji() + " \n**Kana:** " + vocab.getKana() + " \n**Definition:** " + vocab.getDefinition();
+			content += "\n**ID:** " + v.getId() 
+					+ "\n**Kanji:** " + v.getKanji() 
+					+ "\n**Kana:** " + v.getKana()
+					+ "\n**Definition:** " + v.getDefinition();
 		}
 		else {
 			content = "Could not find a random vocabulary word.";
