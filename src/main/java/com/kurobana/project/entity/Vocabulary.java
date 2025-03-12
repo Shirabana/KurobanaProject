@@ -5,12 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.TableGenerator;
 
 @Entity
 public class Vocabulary {
 	
+	@TableGenerator(name="idGenerator", allocationSize=1)
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="idGenerator")
 	private Long id;
 	
 	@Column(unique=true)
@@ -31,6 +33,10 @@ public class Vocabulary {
 		return String.format(
 			"Vocabulary[id=%d, kanji='%s', kana='%s', definition='%s']",	
 			id, kanji, kana, definition);
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
 	public String getKanji() {

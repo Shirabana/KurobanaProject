@@ -1,0 +1,12 @@
+{
+	"name":"dvocab",
+	"description":"Deletes a vocabulary word by its ID.",
+	"options": [
+		{
+			"name":"id",
+			"description":"ID of the vocabulary word to delete.",
+			"type":4,
+			"required":true
+		}
+	]
+}

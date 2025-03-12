@@ -68,12 +68,17 @@ public class SearchVocabCommand implements SlashCommand {
 		String content;
 		if (!result.isEmpty()) {
 			content = "Here are the search results: ";
+			
 			for(Vocabulary v : result) {
 				content += "\n-----";
-				content += "\n**Kanji:** " + v.getKanji() + " \n**Kana:** " + v.getKana() + " \n**Definition:** " + v.getDefinition();
+				content += "\n**ID:** " + v.getId() 
+						+ "\n**Kanji:** " + v.getKanji() 
+						+ "\n**Kana:** " + v.getKana()
+						+ "\n**Definition:** " + v.getDefinition();
 				
 				if (content.length() > 500) {
-					content += "\nAnd more...";
+					content += "\n-----"
+							+ "\nAnd more...";
 					break;
 				}
 			}

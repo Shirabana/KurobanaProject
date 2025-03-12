@@ -55,7 +55,7 @@ public class GlobalCommandRegistrar implements ApplicationRunner {
 	        	
 				applicationService.createGuildApplicationCommand(applicationId, Long.valueOf(guildId), request)
 	        		.doOnNext(ignore -> log.debug("Successfully registered Guild Command"))
-	        		.doOnError(e -> log.error("Failed to register Guild Command"))
+	        		.doOnError(e -> log.error("Failed to register Guild Command - " + e ))
 	        		.subscribe();
 	        
 			}

@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.kurobana.project.entity.Vocabulary;
 
+@Repository
 public interface VocabularyRepository extends JpaRepository<Vocabulary, Long> {
 	
 	Vocabulary findById(long id);
@@ -25,5 +27,7 @@ public interface VocabularyRepository extends JpaRepository<Vocabulary, Long> {
 	List<Vocabulary> findByDefinitionContaining(String definition);
 	
 	Page<Vocabulary> findAll(Pageable pageable);
+	
+	void deleteById(long Id);
 	
 }
