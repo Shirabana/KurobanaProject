@@ -18,10 +18,9 @@ public class SlashCommandListener {
 
     public SlashCommandListener(List<SlashCommand> slashCommands, GatewayDiscordClient client) {
         commands = slashCommands;
-
+        
         client.on(ChatInputInteractionEvent.class, this::handle).subscribe();
     }
-
 
     public Mono<Void> handle(ChatInputInteractionEvent event) {
         /**
@@ -30,8 +29,8 @@ public class SlashCommandListener {
          * 3. Let the command class handle the logic
          */
     	return Flux.fromIterable(commands)
-            .filter(command -> command.getName().equals(event.getCommandName()))
-            .next()
-            .flatMap(command -> command.handle(event));
+    		.filter(command -> command.getName().equals(event.getCommandName()))
+    		.next()
+    		.flatMap(command -> command.handle(event));
     }
 }
